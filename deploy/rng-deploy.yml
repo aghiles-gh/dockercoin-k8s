@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rng
+  name: rng
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rng
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: rng
+    spec:
+      containers:
+      - image: aghilesgh/dockercoins-rng:1.0.1
+        name: dockercoins-rng
